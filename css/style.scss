@@ -1,0 +1,335 @@
+@font-face {
+	font-family: 'Exo';
+	src: url('fonts/Exo2.0-Thin.eot');
+	src: url('fonts/Exo2.0-Thin.eot?#iefix') format('embedded-opentype'),
+		 url('fonts/Exo2.0-Thin.woff') format('woff'),
+		 url('fonts/Exo2.0-Thin.ttf') format('truetype'),
+		 url('fonts/Exo2.0-Thin.svg#Exo') format('svg');
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'TrebuchetMS';
+	src: url('fonts/TrebuchetMS.eot');
+	src: url('fonts/TrebuchetMS.eot?#iefix') format('embedded-opentype'),
+		 url('fonts/TrebuchetMS.woff') format('woff'),
+		 url('fonts/TrebuchetMS.ttf') format('truetype'),
+		 url('fonts/TrebuchetMS.svg#TrebuchetMS') format('svg');
+	font-style: normal;
+	font-weight: normal;
+}
+@font-face {
+	font-family: 'TrebuchetMS';
+	src: url('fonts/TrebuchetMS-Bold.eot');
+	src: url('fonts/TrebuchetMS-Bold.eot?#iefix') format('embedded-opentype'),
+		 url('fonts/TrebuchetMS-Bold.woff') format('woff'),
+		 url('fonts/TrebuchetMS-Bold.ttf') format('truetype'),
+		 url('fonts/TrebuchetMS-Bold.svg#TrebuchetMS-Bold') format('svg');
+	font-style: normal;
+	font-weight: bold;
+}
+
+$blue: #1698d9;
+$blueHover: #2ea8e6;
+$bgcolor: #f2f2f2;
+$radius: 10px;
+$productWidth: 320px;
+$productHeight: 480px;
+$productBorder: 4px;
+$productCorner: 41px;
+$pColor: #666;
+$pNameColor: #000;
+$disabledColor: #b3b3b3;
+$pink: #d91667;
+$pinkHover: #e62e7a;
+%productPE{
+	content: '';
+	display: block;
+	position: absolute;
+	background: $bgcolor;
+	top: 0;
+	height: $productCorner;
+}
+@mixin shadowGradient($top,$bottom){
+	content: '';
+	display: block;
+	position: absolute;
+	left: 0;
+	width: 100%;
+	height: 48.24%;
+	background: -moz-linear-gradient($top, rgba(0,0,0,0.5) 0%, rgba(0,0,0,0) 100%); /* FF3.6-15 */
+	background: -webkit-linear-gradient($top, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%); /* Chrome10-25,Safari5.1-6 */
+	background: linear-gradient(to $bottom, rgba(0,0,0,0.5) 0%,rgba(0,0,0,0) 100%); /* W3C, IE10+, FF16+, Chrome26+, Opera12+, Safari7+ */
+	filter: progid:DXImageTransform.Microsoft.gradient( startColorstr='#a6000000', endColorstr='#00000000',GradientType=0 ); /* IE6-9 */
+	z-index: 0;
+}
+
+html,body{
+	margin: 0;
+	padding: 0;
+	height: 100%;
+}
+body{
+	position: relative;
+	min-height: 100%;
+	background: url(../img/bg.jpg) repeat;
+	font-size: 14px;
+}
+.container{
+	position: relative;
+	height: 100%;
+  display: flex;
+	flex-wrap: wrap;
+  justify-content: center;
+  align-items: center;
+	&::before{
+		@include shadowGradient(top,bottom);
+		top: 0;
+	}
+	&::after{
+		@include shadowGradient(bottom,top);
+		bottom: 0;
+	}
+	@media (max-height: 600px) and (max-width: 1206px){
+		height: auto;
+	}
+}
+.content{
+	/*position: absolute;
+	width: 100%;
+	top: 50%;
+	transform: translateY(-50%);
+	*/
+	position: relative;
+	text-align: center;
+	z-index: 10;
+	&__title{
+		color: #fff;
+		font-family: 'Exo';
+		font-size: 257%;
+		line-height: 1;
+	}
+	&__list{
+		padding: 29px 0 0;
+	}
+}
+.products{
+	/*display: flex;
+	flex-wrap: wrap;
+	justify-content: center;
+	width: 100%;*/
+	&__item{
+		margin: 0 40px;
+		flex-basis: $productWidth;
+	}
+}
+.product{
+	display: inline-block;
+	text-align: left;
+	width: $productWidth;
+	max-width: $productWidth;
+	min-height: $productHeight;
+	box-sizing: border-box;
+	position: relative;
+	font-family: 'TrebuchetMS';
+	margin-bottom: 40px;
+	&::before,
+	&::after,
+	&__layer{
+		border: $productBorder solid $blue;
+	}
+	&::before{
+		@extend %productPE;
+		width: $productCorner * 1.5 / $productWidth * 100%;
+		left: 0;
+		-webkit-transform-origin: 0 100%;
+		transform-origin: 0 100%;
+		-webkit-transform: skew(-45deg);
+		transform: skew(-45deg);
+		border-bottom: none;
+		border-right: none;
+		z-index: 1;
+	}
+	&::after{
+		@extend %productPE;
+		width: ($productWidth - $productCorner * 1.5) / $productWidth * 100%;
+		right: 0;
+		border-radius: 0 $radius 0 0;
+		border-bottom: none;
+		border-left: none;
+		z-index: 2;
+	}
+	&__layer{
+		background: $bgcolor;
+		border-top: none;
+		box-sizing: border-box;
+		border-radius: 0 0 $radius $radius;
+		position: absolute;
+		top: $productCorner + $productBorder - 1px;
+		bottom: 0;
+		left: 0;
+		width: 100%;
+		z-index: 0;
+    overflow: hidden;
+		.product__cat{
+			position: absolute;
+			bottom: 0;
+			left: 0;
+			width: 260px;
+			height: 269px;
+			background: url(../img/cat.png) no-repeat;
+		}
+	}
+	&__text{
+		color: $pColor;
+		padding: 21px 48px 270px;
+		position: relative;
+		z-index: 4;
+		height: 100%;
+    box-sizing: border-box;
+		cursor: pointer;
+	}
+	&__category{
+		font-size: 16/14 * 100%;
+		line-height: 1;
+		position: relative;
+		div{
+			display: none;
+			position: absolute;
+			top: 0;
+			left: 0;
+			width: 100%;
+			height: 100%;
+			background: $bgcolor;
+			color: $pinkHover;
+		}
+	}
+	&__name,
+	&__type{
+		color: $pNameColor;
+		font-weight: bold;
+		line-height: 1;
+	}
+	&__name{
+		font-size: 48/14 * 100%;
+    padding-top: 11px;
+    margin-left: -2px;
+	}
+	&__type{
+		font-size: 24/14 * 100%;
+    padding-top: 5px;
+	}
+	&__list{
+		list-style-type: none;
+		margin: 0;
+		padding: 16px 0 0 0;
+	}
+	&__weight{
+		position: absolute;
+		bottom: 12px;
+		right: 11px;
+		z-index: 5;
+	}
+	&__undertext{
+		position: absolute;
+		top: 100%;
+		left: 0;
+		width: 100%;
+		color: #fff;
+		text-align: center;
+		padding-top: 12px;
+		font-size: 13/14 * 100%;
+		a{
+			font-weight: bold;
+			color:  $blue;
+			border-bottom: 1px dashed $blue;
+			cursor: pointer;
+		}
+	}
+	&_disabled{
+		.product__text{
+			cursor: default;
+			& > *{
+				color: $disabledColor;
+				opacity: 0.5;
+			}
+		}
+		.product__cat{
+			opacity: 0.5;
+		}
+		.weight{
+			background-color: $disabledColor;
+		}
+		&::before,
+		&::after,
+		.product__layer{
+			border-color: $disabledColor;
+		}
+		.product__undertext{
+			color: #ffff66;
+		}
+	}
+	&_hover{
+		.product__undertext{
+			a{
+				color: $blueHover;
+				border-color: $blueHover;
+			}
+		}
+		.weight{
+			background-color: $blueHover;
+		}
+		&::before,
+		&::after,
+		.product__layer{
+			border-color: $blueHover;
+		}
+	}
+	&_selected{
+		.weight{
+			background-color: $pink;
+		}
+		&::before,
+		&::after,
+		.product__layer{
+			border-color: $pink;
+		}
+	}
+	&_selected.product_hover{
+		.weight{
+			background-color: $pinkHover;
+		}
+		&::before,
+		&::after,
+		.product__layer{
+			border-color: $pinkHover;
+		}
+		.product__category{
+			div{
+				display: block;
+			}
+		}
+	}
+	@media (max-width: 400px) {
+		margin-left: 0;
+		margin-right: 0;
+	}
+}
+.weight{
+	width: 81px;
+	height: 81px;
+	background: $blue;
+	border-radius: 50%;
+	color: #fff;
+	font-size: 21px;
+	line-height: 1;
+	text-align: center;
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.weight__value{
+	font-size: 200%;
+	line-height: 1;
+	margin: 3px 0 -3px 0;
+}
