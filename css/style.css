@@ -34,19 +34,18 @@ html, body {
 
 body {
   position: relative;
-  min-height: 100%;
   background: url(../img/bg.jpg) repeat;
   font-size: 14px; }
 
 .container {
   position: relative;
+  min-height: 100%;
   height: 100%;
+  text-align: center;
   display: flex;
-  flex-wrap: wrap;
   justify-content: center;
   align-items: center; }
-  .container::before {
-    content: '';
+  .container__gradient_top {
     display: block;
     position: absolute;
     left: 0;
@@ -62,8 +61,7 @@ body {
     /* IE6-9 */
     z-index: 0;
     top: 0; }
-  .container::after {
-    content: '';
+  .container__gradient_bottom {
     display: block;
     position: absolute;
     left: 0;
@@ -79,16 +77,15 @@ body {
     /* IE6-9 */
     z-index: 0;
     bottom: 0; }
-  @media (max-height: 600px) and (max-width: 1206px) {
+  @media (max-height: 1105px) and (max-width: 1216px) {
+    .container {
+      height: auto; } }
+  @media (max-height: 1625px) and (max-width: 808px) {
     .container {
       height: auto; } }
 
 .content {
-  /*position: absolute;
-	width: 100%;
-	top: 50%;
-	transform: translateY(-50%);
-	*/
+  flex: 1;
   position: relative;
   text-align: center;
   z-index: 10; }
@@ -101,16 +98,15 @@ body {
     padding: 29px 0 0; }
 
 .products {
-  /*display: flex;
-	flex-wrap: wrap;
-	justify-content: center;
-	width: 100%;*/ }
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: center;
+  width: 100%; }
   .products__item {
     margin: 0 40px;
     flex-basis: 320px; }
 
 .product {
-  display: inline-block;
   text-align: left;
   width: 320px;
   max-width: 320px;
